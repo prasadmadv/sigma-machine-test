@@ -13,6 +13,7 @@ class CampaignsController extends Controller
     public function showReport(Request $request)
     {
         $search = !empty($request->search) ? $request->search : "";
+        $perPage = !empty($request->per_page) ? $request->per_page : 5;
         //dd($search);
         $select = [
             'reports.campaign_id as campaign_id', 
@@ -34,7 +35,7 @@ class CampaignsController extends Controller
                         ;
                     })
                     ->groupBy('campaign_id','user_email')
-                    ->paginate(5);
+                    ->paginate($perPage);
                     //->toArray();
         return response()->json($reports);
         //return $reports;

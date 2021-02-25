@@ -6,6 +6,14 @@
 			<input type="text" class="form-control" placeholder="Search anything" v-model="search">
 			<br/>
 			<br/>
+			<select v-model="perPage" placeholder="Per Page">
+			  <option>5</option>
+			  <option>10</option>
+			  <option>20</option>
+			</select>
+			<span>Shwoing {{ perPage }} records per page</span>
+			<br/>
+			<br/>
 
 			<table class="table">
 				<thead>
@@ -24,7 +32,7 @@
 				</thead>
 				<tbody>
 					<tr v-for="(campaign,index) in campaigns.data" :key="campaign.id">
-						<td>{{(campaigns.current_page*5)-5 + index+1}}</td>
+						<td>{{(campaigns.current_page*perPage)-perPage + index+1}}</td>
 						<td>{{campaign.clicks}}</td>
 						<td>{{campaign.username}}</td>
 						<td>{{campaign.user_email}}</td>
@@ -49,6 +57,7 @@
 		data(){
 			return {
     			search: '',
+    			perPage: 5,
 				campaigns: []
 			}
 		},
@@ -59,14 +68,24 @@
 		watch: {
 		  search(after, before) {
 		    this.getResults();
+		  },
+		  perPage(after, before) {
+		    this.getResults();
 		  }
 		},
 		methods: {
 			//get pagination results
 			getResults(page = 1){
 			console.log(this.search);
+			console.log(this.perPage);
 
-				axios.get(`/api/reports?page=${page}&search=${this.search}`)
+				axios.get(`/api/reports`,{
+					params:{
+						page: page,
+						search: this.search,
+						per_page: this.perPage,
+					}
+				})
 				.then(response => {
                     this.campaigns =  response.data;
 					//console.log(response.data);
