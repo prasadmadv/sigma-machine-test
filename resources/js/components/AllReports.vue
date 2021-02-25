@@ -46,8 +46,9 @@
 				campaigns: []
 			}
 		},
-		created(){
-			this.getResults(1);
+		mounted() {
+			// Fetch initial results
+			this.getResults();
 		},
 		methods: {
 			//get pagination results

@@ -11,13 +11,14 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr v-for="campaign in campaigns" :key="campaign.id">
+					<tr v-for="campaign in campaigns.data" :key="campaign.id">
 						<td>{{campaign.id}}</td>
 						<td>{{campaign.name}}</td>
 						<td>{{campaign.created_at}}</td>
 					</tr>
 				</tbody>
 			</table>
+			<pagination :data="campaigns" @pagination-change-page="getResults"></pagination>
 
 	</div>
 
@@ -29,12 +30,21 @@
 				campaigns: []
 			}
 		},
-		created(){
-			axios.get('/api/campaigns')
-			.then(response => {
-				this.campaigns = response.data;
-				console.log(response.data);
-			})
+		mounted() {
+			// Fetch initial results
+			this.getResults();
+		},
+		methods: {
+			//get pagination results
+			getResults(page = 1){
+
+				axios.get(`/api/campaigns?page=${page}`)
+				.then(response => {
+                    this.campaigns =  response.data;
+					//console.log(response.data);
+                });
+
+			}
 		}
 	};
 </script>

@@ -29,13 +29,14 @@ class CampaignsController extends Controller
                     ->paginate(5);
                     //->toArray();
         return response()->json($reports);
-        return $reports;
+        //return $reports;
 
     }
     public function index()
     {
-        $items = Campaign::all()->toArray();
-        return $items;
+        $items = Campaign::paginate(5);
+        return response()->json($items);
+        //return $items;
     }
     public function add(Request $request)
     {
