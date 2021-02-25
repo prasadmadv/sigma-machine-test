@@ -22,13 +22,13 @@ class ReportFactory extends Factory
      */
     public function definition()
     {
-        $user = \App\Models\User::factory()->create();
-        $campaign = \App\Models\Campaign::factory()->create();
+        //$user = \App\Models\User::factory()->create();
+        //$campaign = \App\Models\Campaign::factory()->create();
         return [
             //failsafe values only when calling ReportFactory direclty probably during test cases
             //if any
-            'user_email' => $user->email,
-            'campaign_id' => $campaign->id,
+            'user_email' => null,//$user->email,
+            'campaign_id' => null,//$campaign->id,
             'source_url' => $this->faker->url,
             'destination_url' => $this->faker->url,
             'user_agent' => $this->faker->userAgent,
