@@ -64,7 +64,7 @@ class CampaignsController extends Controller
     }
     public function index()
     {
-        $items = Campaign::paginate(5);
+        $items = Campaign::orderBy('updated_at','desc')->paginate(5);
         return response()->json($items);
         //return $items;
     }

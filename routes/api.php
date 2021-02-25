@@ -9,7 +9,7 @@ Route::get('reports',[CampaignsController::class,'showReport']);
 Route::get('download-report',[CampaignsController::class,'downloadReport']);
 
 Route::get('campaigns',[CampaignsController::class,'index']);
-Route::group(['prefix'=>'campaign'],function(){
+Route::group(['prefix'=>'campaigns'],function(){
 	Route::post('add', [CampaignsController::class,'add']);
 	Route::get('edit/{id}', [CampaignsController::class,'edit']);
 	Route::post('update/{id}', [CampaignsController::class,'update']);

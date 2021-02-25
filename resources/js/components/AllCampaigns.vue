@@ -2,6 +2,8 @@
 	<div>
 		<h3>All Campaigns</h3>
 
+			<router-link class="btn btn-primary" :to="{ name: 'add-campaign' }">Add Campaign</router-link>
+
 			<table class="table tabl-bordered">
 				<thead>
 					<tr>

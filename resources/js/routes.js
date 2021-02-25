@@ -1,4 +1,5 @@
 import AllCampaigns from './components/AllCampaigns.vue';
+import AddCampaign from './components/AddCampaign.vue';
 import AllReports from './components/AllReports.vue';
 
 export const routes = [
@@ -11,5 +12,10 @@ export const routes = [
 		name: 'reports',
 		path: '/reports',
 		component: AllReports,
+	},
+	{
+		name: 'add-campaign',
+		path: '/add',
+		component: AddCampaign,
 	}
 ];
