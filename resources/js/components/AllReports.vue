@@ -17,6 +17,25 @@
 			<br/>
 			<br/>
 
+			<export-excel
+			class="btn btn-primary btn-round"
+		    :data   = "campaigns.data"
+		    worksheet = "Report"
+		    name    = "Report.xls">
+	     	Download Excel
+			</export-excel>
+			
+			<export-excel
+			class="btn btn-primary btn-round"
+		    :data   = "campaigns.data"
+		    type    = "csv"
+		    worksheet = "Report"
+		    name    = "Report.xls">
+	     	Download CSV
+			</export-excel>
+			<br/>
+			<br/>
+
 			<table class="table">
 				<thead>
 					<tr>

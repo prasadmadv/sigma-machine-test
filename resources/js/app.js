@@ -7,10 +7,10 @@ import App from './App.vue';
 import BootstrapVue from "bootstrap-vue";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
+import excel from 'vue-excel-export'
 
 //pagination
 Vue.component('pagination', require('laravel-vue-pagination'));
-
 
 //import axios for ajax
 import VueRouter from 'vue-router';
@@ -25,6 +25,8 @@ Vue.use(VueRouter);
 //always need to use all axios modules in single line
 Vue.use(VueAxios,axios);
 Vue.use(BootstrapVue);
+//Excel
+Vue.use(excel);
 
 const router = new VueRouter({
 	mode : 'history',
