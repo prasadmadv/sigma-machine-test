@@ -14,6 +14,7 @@ class CampaignsController extends Controller
     {
         $search = !empty($request->search) ? $request->search : "";
         $perPage = !empty($request->per_page) ? $request->per_page : 5;
+        
         //dd($search);
         $select = [
             'reports.campaign_id as campaign_id', 
