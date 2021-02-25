@@ -10,11 +10,31 @@ use DB;
 
 class CampaignsController extends Controller
 {
+    public function downloadReport(Request $request)
+    {
+        $select = [
+            'reports.campaign_id as campaign_id', 
+            'reports.user_email as user_email',
+            'users.username as username',
+            'users.id as user_id',
+            'campaigns.name as campaign_name', 
+            DB::raw('count(*) as clicks'),
+            DB::raw("CONCAT(reports.campaign_id,'-',users.id) as id"),
+        ];
+        $reports = DB::table('reports')
+                   ->select($select)
+                    ->leftJoin('users','users.email','reports.user_email')
+                    ->leftJoin('campaigns','campaigns.id','reports.campaign_id')
+                    ->groupBy('campaign_id','user_email')
+                    ->get()
+                    ->toArray();
+        return $reports;
+    }
     public function showReport(Request $request)
     {
         $search = !empty($request->search) ? $request->search : "";
         $perPage = !empty($request->per_page) ? $request->per_page : 5;
-        
+
         //dd($search);
         $select = [
             'reports.campaign_id as campaign_id', 

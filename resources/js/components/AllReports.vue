@@ -19,18 +19,22 @@
 
 			<export-excel
 			class="btn btn-primary btn-round"
-		    :data   = "campaigns.data"
+		    :fetch   = "downloadReport"
 		    worksheet = "Report"
-		    name    = "Report.xls">
+		    name    = "Report.xls"
+		    :before-generate = "startDownload"
+      		:before-finish   = "finishDownload">
 	     	Download Excel
 			</export-excel>
-			
+
 			<export-excel
 			class="btn btn-primary btn-round"
-		    :data   = "campaigns.data"
-		    type    = "csv"
+		    :fetch   = "downloadReport"
+		    type  = "csv"
 		    worksheet = "Report"
-		    name    = "Report.xls">
+		    name    = "Report.xls"
+		    :before-generate = "startDownload"
+      		:before-finish   = "finishDownload">
 	     	Download CSV
 			</export-excel>
 			<br/>
@@ -44,11 +48,11 @@
 						<td>Username</td>
 						<td>User Email</td>
 						<td>Campaign Name</td>
-						<td>Source URL</td>
+						<!-- <td>Source URL</td>
 						<td>Destination URL</td>
 						<td>User Agent</td>
 						<td>IP</td>
-						<td>Created</td>
+						<td>Created</td> -->
 					</tr>
 				</thead>
 				<tbody>
@@ -97,8 +101,8 @@
 		methods: {
 			//get pagination results
 			getResults(page = 1){
-			console.log(this.search);
-			console.log(this.perPage);
+				console.log(this.search);
+				console.log(this.perPage);
 
 				axios.get(`/api/reports`,{
 					params:{
@@ -112,7 +116,18 @@
 					//console.log(response.data);
                 });
 
-			}
+			},
+			async downloadReport(){
+		      const response = await axios.get(`/api/download-report`);
+		      console.log(response);
+		      return response.data;
+		    },
+		    startDownload(){
+		        alert('Downloading Report...');
+		    },
+		    finishDownload(){
+		        alert('Download Ready!');
+		    }
 		}
 	};
 </script>

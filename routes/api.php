@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\CampaignsController;
 
 Route::get('reports',[CampaignsController::class,'showReport']);
+Route::get('download-report',[CampaignsController::class,'downloadReport']);
 
 Route::get('campaigns',[CampaignsController::class,'index']);
 Route::group(['prefix'=>'campaign'],function(){
