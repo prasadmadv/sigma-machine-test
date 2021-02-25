@@ -10,8 +10,10 @@ use DB;
 
 class CampaignsController extends Controller
 {
-    public function showReport()
+    public function showReport(Request $request)
     {
+        $search = !empty($request->search) ? $request->search : "";
+        //dd($search);
         $select = [
             'reports.campaign_id as campaign_id', 
             'reports.user_email as user_email',
@@ -25,6 +27,12 @@ class CampaignsController extends Controller
                    ->select($select)
                     ->leftJoin('users','users.email','reports.user_email')
                     ->leftJoin('campaigns','campaigns.id','reports.campaign_id')
+                    ->when(!empty($search), function($query) use($search) {
+                        return $query->where('username','LIKE', '%'.$search.'%')
+                        ->orWhere('user_email','LIKE', '%'.$search.'%')
+                        ->orWhere('campaigns.name','LIKE', '%'.$search.'%')
+                        ;
+                    })
                     ->groupBy('campaign_id','user_email')
                     ->paginate(5);
                     //->toArray();

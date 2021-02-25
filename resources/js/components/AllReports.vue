@@ -2,7 +2,12 @@
 	<div>
 		<h3>Report Summary</h3>
 
-			<table class="table tabl-bordered">
+			<br/>
+			<input type="text" class="form-control" placeholder="Search anything" v-model="search">
+			<br/>
+			<br/>
+
+			<table class="table">
 				<thead>
 					<tr>
 						<td>ID</td>
@@ -43,6 +48,7 @@
 	export default {
 		data(){
 			return {
+    			search: '',
 				campaigns: []
 			}
 		},
@@ -50,11 +56,17 @@
 			// Fetch initial results
 			this.getResults();
 		},
+		watch: {
+		  search(after, before) {
+		    this.getResults();
+		  }
+		},
 		methods: {
 			//get pagination results
 			getResults(page = 1){
+			console.log(this.search);
 
-				axios.get(`/api/reports?page=${page}`)
+				axios.get(`/api/reports?page=${page}&search=${this.search}`)
 				.then(response => {
                     this.campaigns =  response.data;
 					//console.log(response.data);
