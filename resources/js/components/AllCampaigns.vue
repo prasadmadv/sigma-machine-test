@@ -10,6 +10,7 @@
 						<td>ID</td>
 						<td>Name</td>
 						<td>Created</td>
+						<td>Actions</td>
 					</tr>
 				</thead>
 				<tbody>
@@ -17,6 +18,11 @@
 						<td>{{campaign.id}}</td>
 						<td>{{campaign.name}}</td>
 						<td>{{campaign.created_at}}</td>
+						<td>
+							<div class="btn-group" role="group">
+								<router-link :to="{name:'edit-campaign', params: {id:campaign.id} }"  class="btn btn-primary">Edit</router-link>
+							</div>
+						</td>
 					</tr>
 				</tbody>
 			</table>

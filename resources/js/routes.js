@@ -1,5 +1,6 @@
 import AllCampaigns from './components/AllCampaigns.vue';
 import AddCampaign from './components/AddCampaign.vue';
+import EditCampaign from './components/EditCampaign.vue';
 import AllReports from './components/AllReports.vue';
 
 export const routes = [
@@ -17,5 +18,10 @@ export const routes = [
 		name: 'add-campaign',
 		path: '/add',
 		component: AddCampaign,
+	},
+	{
+		name: 'edit-campaign',
+		path: '/edit/:id',
+		component: EditCampaign,
 	}
 ];
