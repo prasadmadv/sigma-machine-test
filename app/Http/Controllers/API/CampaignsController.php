@@ -26,8 +26,9 @@ class CampaignsController extends Controller
                     ->leftJoin('users','users.email','reports.user_email')
                     ->leftJoin('campaigns','campaigns.id','reports.campaign_id')
                     ->groupBy('campaign_id','user_email')
-                    ->get()
-                    ->toArray();
+                    ->paginate(5);
+                    //->toArray();
+        return response()->json($reports);
         return $reports;
 
     }

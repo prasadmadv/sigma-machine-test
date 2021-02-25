@@ -18,20 +18,23 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr v-for="campaign in campaigns" :key="campaign.id">
-						<td>{{campaign.id}}</td>
+					<tr v-for="(campaign,index) in campaigns.data" :key="campaign.id">
+						<td>{{(campaigns.current_page*5)-5 + index+1}}</td>
 						<td>{{campaign.clicks}}</td>
 						<td>{{campaign.username}}</td>
 						<td>{{campaign.user_email}}</td>
 						<td>{{campaign.campaign_name}}</td>
-						<td>{{campaign.source_url}}</td>
+						<!-- <td>{{campaign.source_url}}</td>
 						<td>{{campaign.destination_url}}</td>
 						<td>{{campaign.user_agent}}</td>
 						<td>{{campaign.ip}}</td>
-						<td>{{campaign.created_at}}</td>
+						<td>{{campaign.created_at}}</td> -->
 					</tr>
 				</tbody>
 			</table>
+
+			<pagination :data="campaigns" @pagination-change-page="getResults"></pagination>
+
 
 	</div>
 
@@ -44,11 +47,19 @@
 			}
 		},
 		created(){
-			axios.get('/api/reports')
-			.then(response => {
-				this.campaigns = response.data;
-				console.log(response.data);
-			})
+			this.getResults(1);
+		},
+		methods: {
+			//get pagination results
+			getResults(page = 1){
+
+				axios.get(`/api/reports?page=${page}`)
+				.then(response => {
+                    this.campaigns =  response.data;
+					//console.log(response.data);
+                });
+
+			}
 		}
 	};
 </script>

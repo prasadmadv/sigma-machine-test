@@ -8,6 +8,10 @@ import BootstrapVue from "bootstrap-vue";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 
+//pagination
+Vue.component('pagination', require('laravel-vue-pagination'));
+
+
 //import axios for ajax
 import VueRouter from 'vue-router';
 import VueAxios from 'vue-axios';
